@@ -1,0 +1,72 @@
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  
+  <!-- ID Column -->
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef> ID </th>
+    <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef> Name </th>
+    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+  </ng-container>
+
+  <!-- Description Column -->
+  <ng-container matColumnDef="description">
+    <th mat-header-cell *matHeaderCellDef> Description </th>
+    <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+  </ng-container>
+
+  <!-- Price Column -->
+  <ng-container matColumnDef="price">
+    <th mat-header-cell *matHeaderCellDef> Price </th>
+    <td mat-cell *matCellDef="let element"> {{element.price}}$ </td>
+  </ng-container>
+
+  <!-- Provider Column -->
+  <ng-container matColumnDef="provider">
+    <th mat-header-cell *matHeaderCellDef> Provider </th>
+    <td mat-cell *matCellDef="let element"> {{element.provider}} </td>
+  </ng-container>
+
+  <!-- Rating Column -->
+  <ng-container matColumnDef="rating">
+    <th mat-header-cell *matHeaderCellDef> Rating </th>
+    <td mat-cell *matCellDef="let element"> {{element.rating}} </td>
+  </ng-container>
+
+  <!-- Review Count Column -->
+  <ng-container matColumnDef="reviewCount">
+    <th mat-header-cell *matHeaderCellDef> Reviews </th>
+    <td mat-cell *matCellDef="let element"> {{element.reviewCount}} </td>
+  </ng-container>
+
+  <!-- Image URL Column -->
+  <ng-container matColumnDef="imageUrl">
+    <th mat-header-cell *matHeaderCellDef> Image </th>
+    <td mat-cell *matCellDef="let element">
+      <img *ngIf="element.imageUrl" [src]="element.imageUrl" alt="{{element.name}}" width="50">
+    </td>
+  </ng-container>
+
+  <!-- Category ID Column -->
+  <ng-container matColumnDef="categoryId">
+    <th mat-header-cell *matHeaderCellDef> Category ID </th>
+    <td mat-cell *matCellDef="let element"> {{element.categoryId}} </td>
+  </ng-container>
+
+  <!-- Actions Column -->
+  <ng-container matColumnDef="Actions">
+    <th mat-header-cell *matHeaderCellDef> Actions </th>
+    <td mat-cell *matCellDef="let element">
+      <button mat-icon-button color="warn" (click)="openDialog(element.id, element.name)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </td>
+  </ng-container>
+
+  <!-- Header and Row Definitions -->
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
