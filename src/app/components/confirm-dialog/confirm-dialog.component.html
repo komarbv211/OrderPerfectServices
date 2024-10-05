@@ -1,11 +1,11 @@
 <div class="dialog">
-    <h3 mat-dialog-title>Delete Sevise</h3>
+    <h2 mat-dialog-title>Delete Sevise</h2>
     <mat-dialog-content>
         Would you like to delete {{data.productName}}?
     </mat-dialog-content>
     <mat-dialog-actions>
-      <button mat-button (click)="onNoClick()">No</button>
-      <button mat-button (click)="onConfirm()" cdkFocusInitial>Yes</button>
+        <button mat-button mat-dialog-close (click)="onNoClick()">No</button>
+        <button mat-button mat-dialog-close (click)="onConfirm()" cdkFocusInitial>Ok</button>
     </mat-dialog-actions>
   </div>
   

@@ -12,8 +12,7 @@ import { ServicesListComponent } from "./components/services-list/services-list.
     BookingListComponent, 
     FooterComponent, 
     HeaderComponent,
-    ServicesListComponent
-  ],
+    ServicesListComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

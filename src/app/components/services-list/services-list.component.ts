@@ -8,7 +8,7 @@ import { CommonModule } from '@angular/common';
 import { MatTableModule } from '@angular/material/table'; 
 import { MatIconModule } from '@angular/material/icon'; 
 import { MatButtonModule } from '@angular/material/button'; 
-
+import { ServiceFormComponent} from '../../service-form/service-form.component'
 @Component({
   selector: 'app-services-list',
   standalone: true,
@@ -61,4 +61,29 @@ export class ServicesListComponent implements OnInit {
       this.loadServices(); 
     }, error => console.error('Error deleting service', error));
   }
+  openAddServiceForm(): void {
+    const dialogRef = this.dialog.open(ServiceFormComponent, {
+      width: '600px'
+    });
+  
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.loadServices(); 
+      }
+    });
+  }
+  openUpdateServiceForm(service: Service): void {
+    const dialogRef = this.dialog.open(ServiceFormComponent, {
+      width: '600px',
+      data: { service } 
+    });
+  
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.loadServices(); 
+      }
+    });
+  }
+  
+  
 }

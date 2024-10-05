@@ -22,12 +22,12 @@ getServices(): Observable<Service[]> {
     return this.http.get<Service>(`${this.apiUrl}/${id}`);
   }
 
-  createServices(booking: Service): Observable<Service> {
-    return this.http.post<Service>(this.apiUrl, booking);
+  createService(booking: Service): Observable<Service> {
+    return this.http.post<Service>(`${this.apiUrl}/Create`, booking);
   }
 
-  updateServices(id: number, booking: Service): Observable<Service> {
-    return this.http.put<Service>(`${this.apiUrl}/${id}`, booking);
+  updateService(booking: Service): Observable<Service> {
+    return this.http.put<Service>(`${this.apiUrl}/Update`, booking);
   }
 
   deleteService(id: number): Observable<void> {
