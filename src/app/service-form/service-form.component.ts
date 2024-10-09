@@ -10,7 +10,8 @@ import { ServiceService } from '../services/service.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBarModule, MatSnackBar } from '@angular/material/snack-bar';
 import { Service } from '../models/service.model';
-
+import { CategoryService } from '../services/category.service';
+import { Category } from '../models/category.model';
 @Component({
   selector: 'app-service-form',
   standalone: true,
@@ -21,44 +22,57 @@ import { Service } from '../models/service.model';
     MatInputModule, 
     MatButtonModule, 
     MatSelectModule,
-    MatSnackBarModule
+    MatSnackBarModule,
   ],
   templateUrl: './service-form.component.html',
   styleUrls: ['./service-form.component.css']
 })
 export class ServiceFormComponent implements OnInit {
   serviceForm!: FormGroup;
-  categories = [
-    { id: 1, name: 'Category 1' },
-    { id: 2, name: 'Category 2' },
-    { id: 3, name: 'Category 3' }
-  ]; 
+  categories: Category[] = [];
 
   constructor(
     private fb: FormBuilder, 
     private serviceService: ServiceService,
+    private categoryService: CategoryService,
     private dialogRef: MatDialogRef<ServiceFormComponent>,
     @Inject(MAT_DIALOG_DATA) public data: { service?: Service },
     private snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
+    this.loadCategories();
     this.serviceForm = this.fb.group({
       id: [this.data?.service?.id || null],
       name: [this.data?.service?.name || '', [Validators.required]],
-      description: [this.data?.service?.description || '', [Validators.required]],
+      description: [this.data?.service?.description || null,  [Validators.maxLength(2000)],],
       price: [this.data?.service?.price || 0, [Validators.required, Validators.min(0)]],
       provider: [this.data?.service?.provider || '', [Validators.required]],
       rating: [this.data?.service?.rating || 0, [Validators.required, Validators.min(0), Validators.max(5)]],
       reviewCount: [this.data?.service?.reviewCount || 0, [Validators.required, Validators.min(0)]],
-      imageUrl: [this.data?.service?.imageUrl || '', [Validators.required]],
+      imageUrl: [this.data?.service?.imageUrl || null],
       categoryId: [this.data?.service?.categoryId || null, [Validators.required]]
     });
+  }
+  loadCategories(): void {
+      this.categoryService.get().subscribe(
+        data => {
+          this.categories = data;
+          console.log('Categories loaded:', data);
+        },
+        error => {
+          console.error('Error loading categories:', error);
+          this.showSnackBar('Error loading categories.');
+        }
+      );
   }
 
   onSubmit(): void {
     if (this.serviceForm.valid) {
       const serviceData = this.serviceForm.value;
+      if (serviceData.imageUrl===" ") {
+        serviceData.imageUrl = null;
+      }
       if (serviceData.id) {
         this.updateService(serviceData);
       } else {

@@ -5,6 +5,9 @@
 }
 .container main {
     flex-grow: 1;
+    padding: 16px;
+    width: 86%;
+    margin: 10px auto;
 }
 h1 {
     text-align: center;

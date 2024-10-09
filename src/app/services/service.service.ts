@@ -12,10 +12,9 @@ export class ServiceService {
 
   constructor(private http: HttpClient) { }
 
-  // service.service.ts
-getServices(): Observable<Service[]> {
-  return this.http.get<Service[]>(`${this.apiUrl}/GetAll`);
-}
+  getServices(): Observable<Service[]> {
+    return this.http.get<Service[]>(`${this.apiUrl}/GetAll`);
+  }
 
 
   getServicesById(id: number): Observable<Service> {

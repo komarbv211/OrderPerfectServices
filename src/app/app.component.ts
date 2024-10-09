@@ -4,6 +4,7 @@ import { BookingListComponent } from './components/booking-list/booking-list.com
 import { FooterComponent } from "./components/footer/footer.component";
 import { HeaderComponent } from "./components/header/header.component";
 import { ServicesListComponent } from "./components/services-list/services-list.component";
+import { HomePageComponent } from './components/home-page/home-page.component';
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -12,7 +13,8 @@ import { ServicesListComponent } from "./components/services-list/services-list.
     BookingListComponent, 
     FooterComponent, 
     HeaderComponent,
-    ServicesListComponent],
+    ServicesListComponent,
+    HomePageComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
