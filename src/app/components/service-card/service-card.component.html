@@ -3,10 +3,13 @@
       <mat-card-header>
         <mat-card-title>{{ service.name }}</mat-card-title>
       </mat-card-header>
-      <img mat-card-image [src]="service.imageUrl | defaultImage" alt="{{ service.name }} image">      <mat-card-content>
+      <img mat-card-image [src]="service.imageUrl | defaultImage" alt="{{ service.name }} image">      
+      <mat-card-content>
         <p>{{ service.description }}</p>
         <p><strong>Price:</strong> {{ service.price }}</p>
       </mat-card-content>
+      <mat-star-rating [rating]="service.rating" [starCount]="5" (ratingUpdated)="onRatingUpdated(service, $event)">
+      </mat-star-rating>    
       <mat-card-actions>
         <button mat-button color="primary" >Detail</button>
         <button mat-button color="accent" >Reserve</button>
